@@ -7,7 +7,7 @@ var createChart = function(mount){
 			data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 		}]
 	});
-	_charts.push(chart);
+	console.log('stuff')
 }
 
 var _charts = []
@@ -33,9 +33,9 @@ var Chart = React.createClass({
 	render: function(){
 		var mount = 'mount'+this.state.count;
 		this.increment;
-		return React.createElement('div', { className: mount } )
+		return React.createElement('div', { id: 'mount0', className: 'chart' } )
 	},
-	componentDidUpdate: function(){
+	componentDidMount: function(){
 		createChart('mount0')
 	}
 })
@@ -43,7 +43,7 @@ var Chart = React.createClass({
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	render: function(){
-		return React.createElement('div', {className:'container'}, 
+		return React.createElement('div', {className:'chart-container'}, 
 			React.createElement(Chart, null)
 		)
 	}
