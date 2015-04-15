@@ -4,15 +4,27 @@
 		<title>Chart-Roulette</title>
 	</head>
 	<body>
+	<div id="container"></div>
+	<div id="mount"></div>
 		<script src="./frameworks/react.js"></script>
 		<script src="./frameworks/standalone-framework.src.js"></script>
 		<script src="./frameworks/highcharts.js"></script>
 		<script src="./components/app.js"></script>
 		<script>
-			// var com = React.render(
-			// 	React.createElement( Tree, null),
-			// 	document.body
-			// )
+var chart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'container'
+    },
+
+    series: [{
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    }]
+
+});
+			var com = React.render(
+				React.createElement( App, null),
+				document.getElementById('mount')
+			)
 		</script>
 	</body>
 </html>
