@@ -1,5 +1,3 @@
-
-
 var _charts = []
 
 var App = React.createClass({
@@ -22,11 +20,11 @@ var Chart = React.createClass({
 	displayName: 'Chart',
 	render: function(){
 		var mount = 'mount'+this.state.count;
-		this.increment;
-		return React.createElement('div', { id: 'mount0', className: 'chart' } )
+		return React.createElement('div', { id: mount, className: 'chart' } )
 	},
 	componentDidMount: function(){
-		createChart('mount0')
+		createChart('mount'+this.state.count)
+		this.increment();
 	}
 })
 
