@@ -1,11 +1,26 @@
-var _charts = [0,1]
+var _charts = ['a','b','c']
 
 var App = React.createClass({
 	displayName: "App",
+	scroll: function(np){
+		var len = this.state._charts.length;
+		var current = ((this.state.current + np)+len) % len;
+		this.setState({current: current});
+		console.log(this.state);
+	},
+	getInitialState: function(){
+		return({
+			current: 0,
+			_charts: _charts
+		})
+	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
-			React.createElement(ChartContainer, null),
-			React.createElement(Nav, null)
+			React.createElement(ChartContainer, {
+				current:this.state.current,
+				_charts: this.state._charts
+			}),
+			React.createElement(Nav, {scroll: this.scroll})
 		)
 	}
 })
@@ -20,7 +35,6 @@ var Chart = React.createClass({
 	displayName: 'Chart',
 	render: function(){
 		var mount = 'mount'+this.props.count;
-		console.log(mount);
 		return React.createElement('div', { id: mount, className: 'chart '+this.props.class } );
 	},
 	componentDidMount: function(){
@@ -30,23 +44,17 @@ var Chart = React.createClass({
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
-	getInitialState(){
-		return ({
-			_charts: _charts,
-			current: 0
-		})
-	},
 	render: function(){
 		var array = [];
-		var _charts = this.state._charts
+		var _charts = this.props._charts
 		for(var i = 0, iLen = _charts.length; i < iLen; i++){
 			var current = '';
-			var curState = this.state.current;
+			var curState = this.props.current;
 			if(i===curState){
 				current = 'current';
 			}
 			array.push(React.createElement(Chart, {
-				class:'current',
+				class:current,
 				count: i 
 			}))
 		}
@@ -57,6 +65,9 @@ var ChartContainer = React.createClass({
 })
 var Nav = React.createClass({
 	displayName: 'Nav',
+	scroll: function(np){
+		this.props.scroll(np);
+	},
 	render: function(){
 		return React.createElement('div', null,
 			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Prev'}),
@@ -66,18 +77,18 @@ var Nav = React.createClass({
 		);
 	},
 	onClick: function(event){
-		console.log(event.target.value)
 		switch(event.target.value){
 			case 'Prev':
+				this.props.scroll(-1);
 				break;
 			case 'Add':
 				break;
 			case 'Sub':
 				break;
 			case 'Next':
+				this.props.scroll(1);
 				break;
 			default:
-				console.log('else');
 		}
 	}
 })
