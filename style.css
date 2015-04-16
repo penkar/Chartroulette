@@ -2,4 +2,8 @@
 	height: 200px;
 	width: 400px;
 	margin: 0px;
+	display: none;
+}
+.chart.current{
+	display: inline-block;
 }

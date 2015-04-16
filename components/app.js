@@ -1,4 +1,4 @@
-var _charts = [0]
+var _charts = [0,1]
 
 var App = React.createClass({
 	displayName: "App",
@@ -17,35 +17,38 @@ var Chart = React.createClass({
 			chartCount:[0]
 		}
 	},
-	increment: function(){
-		var chartCount = this.state.chartCount;
-		createChart('mount'+this.state.count);
-		this.setState({
-			count: (this.state.count + 1)
-		});
-		console.log(this);
-	},
 	displayName: 'Chart',
 	render: function(){
-		var mount = 'mount'+this.state.count;
+		var mount = 'mount'+this.props.count;
 		console.log(mount);
-		return React.createElement('div', { id: mount, className: 'chart' } );
+		return React.createElement('div', { id: mount, className: 'chart '+this.props.class } );
 	},
 	componentDidMount: function(){
-		this.increment();
+		createChart('mount'+this.props.count);
 	}
 })
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState(){
-		return ({_charts: _charts})
+		return ({
+			_charts: _charts,
+			current: 0
+		})
 	},
 	render: function(){
 		var array = [];
 		var _charts = this.state._charts
 		for(var i = 0, iLen = _charts.length; i < iLen; i++){
-			array.push(React.createElement(Chart, null))
+			var current = '';
+			var curState = this.state.current;
+			if(i===curState){
+				current = 'current';
+			}
+			array.push(React.createElement(Chart, {
+				class:current,
+				count: i 
+			}))
 		}
 		return React.createElement('div', {className:'chart-container'}, 
 			array
