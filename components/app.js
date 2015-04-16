@@ -46,7 +46,7 @@ var ChartContainer = React.createClass({
 				current = 'current';
 			}
 			array.push(React.createElement(Chart, {
-				class:current,
+				class:'current',
 				count: i 
 			}))
 		}
@@ -59,11 +59,26 @@ var Nav = React.createClass({
 	displayName: 'Nav',
 	render: function(){
 		return React.createElement('div', null,
-			React.createElement('input', {type:'button', value: 'Prev'}),
-			React.createElement('input', {type:'button', value: 'Add'}),
-			React.createElement('input', {type:'button', value: 'Sub'}),
-			React.createElement('input', {type:'button', value: 'Next'})
+			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Prev'}),
+			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Add'}),
+			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Sub'}),
+			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Next'})
 		);
+	},
+	onClick: function(event){
+		console.log(event.target.value)
+		switch(event.target.value){
+			case 'Prev':
+				break;
+			case 'Add':
+				break;
+			case 'Sub':
+				break;
+			case 'Next':
+				break;
+			default:
+				console.log('else');
+		}
 	}
 })
 
