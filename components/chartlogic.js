@@ -4,7 +4,6 @@ var createChart = function(mount, series){
 		chart: { renderTo: mount},
 		series
 	});
-	console.log('stuff')
 }
 
 var randomData = function(){

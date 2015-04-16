@@ -1,4 +1,4 @@
-var _charts = []
+var _charts = [0,1]
 
 var App = React.createClass({
 	displayName: "App",
@@ -12,18 +12,22 @@ var App = React.createClass({
 
 var Chart = React.createClass({
 	getInitialState: function(){
-		return {count:0}
+		return {
+			count:0,
+			chartCount:[]
+		}
 	},
 	increment: function(){
-		this.setState({count: (this.state.count + 1)})
+		this.setState({count: (this.state.count + 1)});
 	},
 	displayName: 'Chart',
 	render: function(){
 		var mount = 'mount'+this.state.count;
-		return React.createElement('div', { id: mount, className: 'chart' } )
+		console.log(mount);
+		return React.createElement('div', { id: mount, className: 'chart' } );
 	},
 	componentDidMount: function(){
-		createChart('mount'+this.state.count)
+		createChart('mount'+this.state.count);
 		this.increment();
 	}
 })
@@ -31,8 +35,12 @@ var Chart = React.createClass({
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	render: function(){
+		var array = [];
+		for(var i = 0, iLen = _charts.length; i < iLen; i++){
+			array.push(React.createElement(Chart, null))
+		}
 		return React.createElement('div', {className:'chart-container'}, 
-			React.createElement(Chart, null)
+			array
 		)
 	}
 })
