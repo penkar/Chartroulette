@@ -1,11 +1,10 @@
 .chart {
-	height: 200px;
-	width: 250px;
+	height: 400px;
+	width: 500px;
 	margin: 0px;
 	display: none;
 }
 .chart-container{
-	width: 400px;
 	display: inline-block;
 }
 .chart.current{

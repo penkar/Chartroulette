@@ -61,7 +61,8 @@ var App = React.createClass({
 var Header = React.createClass({
 	displayName: 'Header',
 	render: function(){
-		return React.createElement('p', {}, this.props.cur +' of '+ this.props.len)
+		var cur = this.props.cur + 1;
+		return React.createElement('p', {}, cur +' of '+ this.props.len)
 	}
 })
 
