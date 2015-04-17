@@ -45,7 +45,7 @@ var App = React.createClass({
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
-			React.createElement('p', null, this.state.current+' of '+this.state._charts.length),
+			React.createElement(Header, {cur: this.state.current, len: this.state._charts.length}),
 			React.createElement(ChartContainer, {
 				recent: this.state.recent
 			}),
@@ -57,6 +57,13 @@ var App = React.createClass({
 		);
 	}
 });
+
+var Header = React.createClass({
+	displayName: 'Header',
+	render: function(){
+		return React.createElement('p', {}, this.props.cur +' of '+ this.props.len)
+	}
+})
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
