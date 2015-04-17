@@ -12,12 +12,15 @@ var App = React.createClass({
 	sub: function(){
 		var current = this.state.current;
 		var _charts = this.state._charts;
-		this.scroll(1);
+		var len = _charts.length;
 		var idx = _charts.indexOf(current);
+		// document['mount'+current].destroy();
+		current = _charts[(idx + 1)%len];
 		_charts.splice(idx,1);
-		console.log(_charts)
-		// document.getElementById('mount'+current).remove();
-		this.setState({_charts: _charts});
+		this.setState({
+			current: current,
+			_charts: _charts
+		});
 	},
 	add: function(){
 		var recent = this.state.recent+1;
@@ -39,6 +42,7 @@ var App = React.createClass({
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
+			React.createElement('p', null, this.state.current),
 			React.createElement(ChartContainer, {
 				current: this.state.current,
 				_charts: this.state._charts
@@ -54,10 +58,12 @@ var App = React.createClass({
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
+	getInitialState:function(){
+		return ({_charts: this.props._charts});
+	},
 	render: function(){
 		var array = [];
 		var _charts = this.props._charts
-		// console.log(_charts)
 		for(var i = 0, iLen = _charts.length; i < iLen; i++){
 			var current = '';
 			var curState = this.props.current;
@@ -66,7 +72,8 @@ var ChartContainer = React.createClass({
 			}
 			array.push(React.createElement(Chart, {
 				class:current,
-				count: _charts[i]
+				count: _charts[i],
+				id: _charts[i]
 			}))
 		}
 		return React.createElement('div', {className:'chart-container'}, 

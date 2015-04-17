@@ -1,6 +1,6 @@
 var createChart = function(mount, series){
 	var series = randomData()
-	var chart = new Highcharts.Chart({
+	document[mount] = new Highcharts.Chart({
 		chart: { renderTo: mount},
 		series,
 		title:{text: mount}
