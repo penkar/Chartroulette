@@ -1,4 +1,4 @@
-var _charts = [0,1,2,3,4,5];
+var _charts = [0,1,3,4,5];
 
 var App = React.createClass({
 	displayName: "App",
@@ -10,7 +10,14 @@ var App = React.createClass({
 		});
 	},
 	sub: function(){
-
+		var current = this.state.current;
+		var _charts = this.state._charts;
+		this.scroll(1);
+		var idx = _charts.indexOf(current);
+		_charts.splice(idx,1);
+		console.log(_charts)
+		// document.getElementById('mount'+current).remove();
+		this.setState({_charts: _charts});
 	},
 	add: function(){
 		var recent = this.state.recent+1;
@@ -24,8 +31,10 @@ var App = React.createClass({
 	},
 	scroll: function(np){
 		var _charts = this.state._charts;
+		var current = this.state.current;
 		var len = _charts.length;
-		var current = ((this.state.current + np)+len) % len;
+		var idx = _charts.indexOf(current);
+		var current = ((idx + np)+len) % len;
 		this.setState({current: _charts[current]});
 	},
 	render: function(){
