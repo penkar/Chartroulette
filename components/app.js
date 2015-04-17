@@ -14,13 +14,14 @@ var App = React.createClass({
 		var _charts = this.state._charts;
 		var len = _charts.length;
 		var idx = _charts.indexOf(current);
-		// document['mount'+current].destroy();
+		document['mount'+current].destroy();
 		current = _charts[(idx + 1)%len];
 		_charts.splice(idx,1);
 		this.setState({
 			current: current,
 			_charts: _charts
 		});
+		this.scroll(1);
 	},
 	add: function(){
 		var _charts = this.state._charts;
@@ -43,7 +44,7 @@ var App = React.createClass({
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
-			React.createElement('p', null, this.state.current),
+			React.createElement('p', null, this.state.current+' of '+this.state._charts.length),
 			React.createElement(ChartContainer, {
 				recent: this.state.recent
 			}),
