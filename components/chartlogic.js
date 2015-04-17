@@ -1,10 +1,18 @@
 var createChart = function(mount, series){
 	var series = randomData()
-	document[mount] = new Highcharts.Chart({
-		chart: { renderTo: mount},
+	document['mount'+mount] = new Highcharts.Chart({
+		chart: { 
+			renderTo: 'mount'+mount,
+			type: chartTypes()
+		},
 		series,
-		title:{text: mount}
+		title: {text: 'Chart Number '+ mount}
 	});
+}
+
+var chartTypes = function(){
+	var types = ['area','bar','pie','line']
+	return types[Math.floor(Math.random()*types.length)]
 }
 
 var randomData = function(){

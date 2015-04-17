@@ -4,6 +4,11 @@
 	margin: 0px;
 	display: none;
 }
+.chart-container{
+	width: 400px;
+	text-align: center;
+	display: inline-block;
+}
 .chart.current{
 	display: inline-block;
 }
