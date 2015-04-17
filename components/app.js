@@ -23,8 +23,8 @@ var App = React.createClass({
 		});
 	},
 	add: function(){
-		var recent = this.state.recent+1;
 		var _charts = this.state._charts;
+		var recent = _charts.length;
 		_charts.push(recent);
 		this.setState({
 			_charts: _charts,
@@ -78,6 +78,15 @@ var ChartContainer = React.createClass({
 			array.push( this.createSingle(i) )
 		}
 		this.setState({charts: array})
+	},
+	componentWillReceiveProps: function(){
+		var recent = this.state.recent;
+		var nr = this.props.recent+1;
+		var array = this.state.charts;
+		for(var i = recent ; i < nr; i++){
+			array.push( this.createSingle(i) )
+		}
+		this.setState({charts: array, recent: nr})
 	},
 	render: function(){
 		return React.createElement('div', {className:'chart-container'}, 
