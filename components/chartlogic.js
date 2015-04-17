@@ -2,7 +2,8 @@ var createChart = function(mount, series){
 	var series = randomData()
 	var chart = new Highcharts.Chart({
 		chart: { renderTo: mount},
-		series
+		series,
+		title:{text: mount}
 	});
 }
 
