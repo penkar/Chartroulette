@@ -15,3 +15,8 @@ var randomData = function(){
 	var series = [{data:array}]
 	return series
 }
+
+var scrollFunc = function(current){
+	document.getElementsByClassName('current')[0].className = "chart"
+	document.getElementById('mount'+current).className = 'chart current'
+}

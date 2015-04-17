@@ -1,11 +1,11 @@
-var _charts = [0,1,3,4,5];
+var _charts = [0,1,2,3,4,5];
 
 var App = React.createClass({
 	displayName: "App",
 	getInitialState: function(){
 		return({
 			current: 0,
-			recent: Math.max.apply(Math, _charts),
+			recent: _charts.length,
 			_charts: _charts
 		});
 	},
@@ -39,13 +39,13 @@ var App = React.createClass({
 		var idx = _charts.indexOf(current);
 		var current = ((idx + np)+len) % len;
 		this.setState({current: _charts[current]});
+		scrollFunc(_charts[current]);
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
 			React.createElement('p', null, this.state.current),
 			React.createElement(ChartContainer, {
-				current: this.state.current,
-				_charts: this.state._charts
+				recent: this.state.recent
 			}),
 			React.createElement(Nav, {
 				scroll: this.scroll,
@@ -59,25 +59,29 @@ var App = React.createClass({
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState:function(){
-		return ({_charts: this.props._charts});
+		return ({
+			recent: this.props.recent,
+			charts: []
+		});
+	},
+	createSingle: function(i){
+		var current = '';
+		if(!i){
+			current = 'current';
+		}
+		return React.createElement(Chart, {class: current, id: i})
+	},
+	componentWillMount: function(){
+		var array = [];
+		var recent = this.props.recent
+		for(var i = 0; i < recent; i++){
+			array.push( this.createSingle(i) )
+		}
+		this.setState({charts: array})
 	},
 	render: function(){
-		var array = [];
-		var _charts = this.props._charts
-		for(var i = 0, iLen = _charts.length; i < iLen; i++){
-			var current = '';
-			var curState = this.props.current;
-			if(_charts[i]===curState){
-				current = 'current';
-			}
-			array.push(React.createElement(Chart, {
-				class:current,
-				count: _charts[i],
-				id: _charts[i]
-			}))
-		}
 		return React.createElement('div', {className:'chart-container'}, 
-			array
+			this.state.charts
 		)
 	}
 });
@@ -85,17 +89,17 @@ var ChartContainer = React.createClass({
 var Chart = React.createClass({
 	getInitialState: function(){
 		return {
-			count:0,
+			id:0,
 			chartCount:[0]
 		}
 	},
 	displayName: 'Chart',
 	render: function(){
-		var mount = 'mount'+this.props.count;
+		var mount = 'mount'+this.props.id;
 		return React.createElement('div', { id: mount, className: 'chart '+this.props.class } );
 	},
 	componentDidMount: function(){
-		createChart('mount'+this.props.count);
+		createChart('mount'+this.props.id);
 	}
 });
 
