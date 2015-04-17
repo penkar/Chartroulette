@@ -2,35 +2,31 @@ var _charts = [0,1,2,3,4,5];
 
 var App = React.createClass({
 	displayName: "App",
+	getInitialState: function(){
+		return({
+			current: 0,
+			recent: Math.max.apply(Math, _charts),
+			_charts: _charts
+		});
+	},
+	sub: function(){
+
+	},
+	add: function(){
+		var recent = this.state.recent+1;
+		var _charts = this.state._charts;
+		_charts.push(recent);
+		this.setState({
+			_charts: _charts,
+			recent: recent,
+			current: recent
+		});
+	},
 	scroll: function(np){
 		var _charts = this.state._charts;
 		var len = _charts.length;
 		var current = ((this.state.current + np)+len) % len;
 		this.setState({current: _charts[current]});
-	},
-	subtract: function(){
-		var charts = this.state._charts;
-		var len = charts.length-1;
-		var current = this.state.current;
-		var idx = charts.indexOf(current);
-		// console.log( charts );
-		// console.log( len );
-		// console.log( current );
-		// console.log( idx );
-
-		charts.splice(idx, 1);
-		current = (current + len)%len;
-		this.setState({
-			current:current,
-			_charts: charts
-		});
-		this.scroll(1);
-	},
-	getInitialState: function(){
-		return({
-			current: 0,
-			_charts: _charts
-		});
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
@@ -40,7 +36,8 @@ var App = React.createClass({
 			}),
 			React.createElement(Nav, {
 				scroll: this.scroll,
-				subtract: this.subtract
+				sub: this.sub,
+				add: this.add
 			})
 		);
 	}
@@ -102,9 +99,10 @@ var Nav = React.createClass({
 				this.props.scroll(-1);
 				break;
 			case 'Add':
+				this.props.add()
 				break;
 			case 'Sub':
-				this.props.subtract()
+				this.props.sub()
 				break;
 			case 'Next':
 				this.props.scroll(1);
