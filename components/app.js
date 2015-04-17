@@ -126,10 +126,10 @@ var Nav = React.createClass({
 	displayName: 'Nav',
 	render: function(){
 		return React.createElement('div', null,
-			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Prev'}),
-			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Add'}),
-			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Sub'}),
-			React.createElement('input', {type:'button', onClick:this.onClick, value: 'Next'})
+			React.createElement('button', {onClick:this.onClick, value: 'Prev', className:"pure-button pure-button-primary"}, 'Prev'),
+			React.createElement('button', {onClick:this.onClick, value: 'Add', className:"pure-button button-success"}, 'Add'),
+			React.createElement('button', {onClick:this.onClick, value: 'Sub', className:"pure-button button-error"}, 'Sub'),
+			React.createElement('button', {onClick:this.onClick, value: 'Next', className:"pure-button pure-button-primary"}, 'Next')
 		);
 	},
 	onClick: function(event){
