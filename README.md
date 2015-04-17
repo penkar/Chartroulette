@@ -1,2 +1,3 @@
 # Chartroulette
-Hacky way to setup multiple highcharts in a single view without jQuery. Only frameworks are HighCharts and Reactjs.
+Highcharts example using React.js. Example has the ability to create and destroy charts. 
+React code mostly located in components/app.js. 
