@@ -1,3 +1,5 @@
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 var _charts = [0,1,2,3,4,5];
 
 var App = React.createClass({
