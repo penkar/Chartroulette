@@ -16,6 +16,9 @@ var App = React.createClass({
 		var current = this.state.current;
 		var _charts = this.state._charts;
 		var len = _charts.length;
+		if(len === 1){
+			return false
+		};
 		var idx = _charts.indexOf(current);
 		document['mount'+current].destroy(); //React JS will not rerender the Highcharts correctly. Since you have to create the highchart after its container has been rendered, when the charts rerender they do properly read the highchart. In order to get around this you have to attach the chart globally and delete it through the global scope. 
 		current = _charts[(idx + 1)%len];
@@ -83,8 +86,8 @@ var ChartContainer = React.createClass({
 		var current = '';
 		if(!i){ // On the first run through when the page is generated this will establish chart 0 as the current chart.
 			current = 'current';
-		} console.log(i);
-		return React.createElement(Chart, {class: current, id: i}) //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
+		};
+		return React.createElement(Chart, {class: current, id: i}); //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
 	},
 	componentWillMount: function(){
 		var array = []; //The first go around this will run and create a new chart from 0 up to recent. 
