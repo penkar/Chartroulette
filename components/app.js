@@ -132,6 +132,7 @@ var Nav = React.createClass({
 			React.createElement('button', {onClick:this.onClick, value: 'Prev', className:"pure-button pure-button-primary"}, 'Prev'),
 			React.createElement('button', {onClick:this.onClick, value: 'Add', className:"pure-button button-success"}, 'Add'),
 			React.createElement('button', {onClick:this.onClick, value: 'Sub', className:"pure-button button-error"}, 'Sub'),
+			React.createElement('button', {onClick:this.onClick, value: 'Add Data', className:"pure-button button-success"}, 'Add Data'),
 			React.createElement('button', {onClick:this.onClick, value: 'Next', className:"pure-button pure-button-primary"}, 'Next')
 		);
 	},
@@ -148,6 +149,10 @@ var Nav = React.createClass({
 				break;
 			case 'Next':
 				this.props.scroll(1);
+				break;
+			case 'Add Data':
+				var id = document.getElementsByClassName('current')[0].id;
+				document[id].addSeries(randomData());
 				break;
 			default:
 		}
