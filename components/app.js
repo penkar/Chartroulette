@@ -87,7 +87,7 @@ var ChartContainer = React.createClass({
 		if(!i){ // On the first run through when the page is generated this will establish chart 0 as the current chart.
 			current = 'current';
 		};
-		return React.createElement(Chart, {class: current, id: i}); //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
+		return React.createElement(Chart, {class: current, id: i, key:i}); //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
 	},
 	componentWillMount: function(){
 		var array = []; //The first go around this will run and create a new chart from 0 up to recent. 
