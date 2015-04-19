@@ -1,4 +1,4 @@
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var RTG = React.addons.CSSTransitionGroup;
 
 var _charts = [0,1,2,3,4,5];
 
@@ -7,7 +7,7 @@ var App = React.createClass({
 	getInitialState: function(){
 		return({	// Get initial state will start the current view at 0, set the recent and get the charts array into state.
 			current: 0,
-			recent: _charts.length,
+			next: _charts.length,
 			_charts: _charts
 		});
 	},
@@ -28,12 +28,12 @@ var App = React.createClass({
 	},
 	add: function(){// This method does 3 things: 
 		var _charts = this.state._charts;
-		var recent = _charts.length;
-		_charts.push(recent);
+		var next = this.state.next;
+		_charts.push(next);
 		this.setState({
 			_charts: _charts, //Adds the new index to the list of available charts. 
-			recent: recent, //  Sends the recent state to the chart container which will in turn create a new chart.
-			current: recent //  Changes the current view to thew newly created chart. 
+			next: (next+1), //  Sends the recent state to the chart container which will in turn create a new chart.
+			current: next //  Changes the current view to thew newly created chart. 
 		});
 	},
 	scroll: function(np){
@@ -49,7 +49,7 @@ var App = React.createClass({
 		return React.createElement('div', {className: 'container'},
 			React.createElement(Header, {cur: this.state.current, len: this.state._charts.length}),
 			React.createElement(ChartContainer, {
-				recent: this.state.recent
+				next: this.state.next
 			}),
 			React.createElement(Nav, {
 				scroll: this.scroll, //Previous and next are not needed, the scroll function passes a +1 / -1 depending on the direction. 
@@ -75,7 +75,7 @@ var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState:function(){
 		return ({
-			recent: this.props.recent,
+			next: this.props.next,
 			charts: []
 		});
 	},
@@ -83,25 +83,25 @@ var ChartContainer = React.createClass({
 		var current = '';
 		if(!i){ // On the first run through when the page is generated this will establish chart 0 as the current chart.
 			current = 'current';
-		}
+		} console.log(i);
 		return React.createElement(Chart, {class: current, id: i}) //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
 	},
 	componentWillMount: function(){
 		var array = []; //The first go around this will run and create a new chart from 0 up to recent. 
-		var recent = this.props.recent
-		for(var i = 0; i < recent; i++){
+		var next = this.props.next
+		for(var i = 0; i < next; i++){
 			array.push( this.createSingle(i) )
 		}
 		this.setState({charts: array})
 	},
 	componentWillReceiveProps: function(){ // ALl further updates will run through this functionality which will create new charts from the current recent up to the new recent.
-		var recent = this.state.recent;
-		var nr = this.props.recent+1;
+		var next = this.state.next;
+		var nr = this.props.next+1;
 		var array = this.state.charts;
-		for(var i = recent ; i < nr; i++){
+		for(var i = next ; i < nr; i++){
 			array.push( this.createSingle(i) )
 		} // Please note, no view are ever destroyed, new ones are just created. The contents will be destroyed through the Highcharts destroy method. However since React and HighCharts don't mesh well it is necessar to keep a div for each previous highchart.
-		this.setState({charts: array, recent: nr})
+		this.setState({charts: array, next: nr})
 	},
 	render: function(){
 		return React.createElement('div', {className:'chart-container'}, 
