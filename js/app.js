@@ -1,4 +1,5 @@
 var CLogic = require('./chartlogic.js');
+var Header = require('./components/header.js');
 
 var _charts = [0,1,2,3,4,5];
 
@@ -63,16 +64,6 @@ var App = React.createClass({
 	}
 });
 
-var Header = React.createClass({
-	displayName: 'Header',
-	render: function(){
-		var cur = this.props.cur + 1;
-		return React.createElement('div',{className:'header'},
-			React.createElement('div', null, 'Chart Roulette - Highcharts in React without jQuery'),
-			React.createElement('p', {}, cur +' of '+ this.props.len)
-		)
-	}
-})
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
