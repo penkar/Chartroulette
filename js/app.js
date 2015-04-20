@@ -1,4 +1,4 @@
-var RTG = React.addons.CSSTransitionGroup;
+var CLogic = require('./chartlogic.js');
 
 var _charts = [0,1,2,3,4,5];
 
@@ -46,7 +46,7 @@ var App = React.createClass({
 		var idx = _charts.indexOf(current);
 		var current = ((idx + np)+len) % len; // Logic that determines what the current view is in the _charts array and finds the next one.
 		this.setState({current: _charts[current]});  // Sets theh current to the new current.
-		scrollFunc(_charts[current]); // Global function that will select the current view, remove the current class, and add the current class to the new current view. 
+		CLogic.scrollFunc(_charts[current]); // Global function that will select the current view, remove the current class, and add the current class to the new current view. 
 	},
 	render: function(){
 		return React.createElement('div', {className: 'container'},
@@ -108,9 +108,7 @@ var ChartContainer = React.createClass({
 	},
 	render: function(){
 		return React.createElement('div', {className:'chart-container'}, 
-			React.createElement(RTG, {transitionName:"example"}, 
-				this.state.charts
-			)
+			this.state.charts
 		)
 	}
 });
@@ -128,7 +126,7 @@ var Chart = React.createClass({
 		return React.createElement('div', { id: mount, className: 'chart '+this.props.class } );
 	},
 	componentDidMount: function(){
-		createChart(this.props.id);
+		CLogic.createChart(this.props.id);
 	}// Component did mount is where the Highchart is actually created and essentially half the problem. Since it is created here after being mounted rerenders do not look at the actual content, it just removes charts from the end going forward.
 });
 
@@ -159,9 +157,11 @@ var Nav = React.createClass({
 				break;
 			case 'Add Data':
 				var id = document.getElementsByClassName('current')[0].id;
-				document[id].addSeries(randomData());
+				document[id].addSeries(CLogic.randomData());
 				break;
 			default:
 		}
 	}
 });
+
+module.exports = App;

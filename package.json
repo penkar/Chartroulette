@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Example Highcharts using React without any jQuery",
   "repository": "https://github.com/penkar/Chartroulette",
-  "main": "js/app.js",
+  "main": "js/body.js",
   "dependencies": {
     "flux": "^2.0.0",
     "keymirror": "~0.1.0",
@@ -19,7 +19,7 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "start": "watchify -o js/bundle.js -v -d js/body.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest"
   },

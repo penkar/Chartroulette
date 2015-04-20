@@ -6,3 +6,8 @@ var Body = React.createClass({
 		return(React.createElement(App, null))
 	}
 })
+
+React.render(
+	React.createElement(Body, null),
+	document.getElementById('mount')
+)
