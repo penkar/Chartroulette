@@ -1,3 +1,5 @@
+var CLogic = require('../chartlogic.js');
+
 var Nav = React.createClass({
 	displayName: 'Nav',
 	render: function(){
