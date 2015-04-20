@@ -26,3 +26,16 @@ button{
 	background: rgb(202, 60, 60); /* this is a maroon */
 	color: white;
 }
+
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.header{
+	margin-top: 15px;
+}

@@ -67,7 +67,7 @@ var Header = React.createClass({
 	displayName: 'Header',
 	render: function(){
 		var cur = this.props.cur + 1;
-		return React.createElement('div',null,
+		return React.createElement('div',{className:'header'},
 			React.createElement('div', null, 'Chart Roulette - Highcharts in React without jQuery'),
 			React.createElement('p', {}, cur +' of '+ this.props.len)
 		)
@@ -93,7 +93,7 @@ var ChartContainer = React.createClass({
 		var array = []; //The first go around this will run and create a new chart from 0 up to recent. 
 		var next = this.props.next
 		for(var i = 0; i < next; i++){
-			array.push( this.createSingle(i) )
+			array.push( this.createSingle(i) );
 		}
 		this.setState({charts: array})
 	},
@@ -108,7 +108,9 @@ var ChartContainer = React.createClass({
 	},
 	render: function(){
 		return React.createElement('div', {className:'chart-container'}, 
-			this.state.charts
+			React.createElement(RTG, {transitionName:"example"}, 
+				this.state.charts
+			)
 		)
 	}
 });
