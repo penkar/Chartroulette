@@ -52,8 +52,9 @@ var App = React.createClass({
 		CLogic.scrollFunc(_charts[current]); // Global function that will select the current view, remove the current class, and add the current class to the new current view. 
 	},
 	render: function(){
+		var idx = this.state._charts.indexOf(this.state.current)
 		return React.createElement('div', {className: 'container'},
-			React.createElement(Header, {cur: this.state.current, len: this.state._charts.length}),
+			React.createElement(Header, {cur: idx, len: this.state._charts.length}),
 			React.createElement(ChartContainer, {
 				next: this.state.next
 			}),
