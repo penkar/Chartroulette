@@ -1,9 +1,15 @@
 var App = require('./app.js');
+var Sidebar = require('./components/sidebar.js');
 
 var Body = React.createClass({
 	displayName: 'Body',
 	render: function(){
-		return(React.createElement(App, null))
+		return(
+			React.createElement('div', null,
+				React.createElement(App, null),
+				React.createElement(Sidebar, null)
+			)
+		)
 	}
 })
 
