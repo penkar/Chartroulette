@@ -22,7 +22,8 @@ var Nav = React.createClass({
 				ChartStore.add()
 				break;
 			case 'Sub':
-				this.props.sub()
+				var id = document.getElementsByClassName('current')[0].id
+				ChartStore.sub(id)
 				break;
 			case 'Next':
 				this.props.scroll(1);

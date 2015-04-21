@@ -6,8 +6,8 @@ var Body = React.createClass({
 	render: function(){
 		return(
 			React.createElement('div', null,
-				React.createElement(App, null),
-				React.createElement(Sidebar, null)
+				React.createElement(Sidebar, null),
+				React.createElement(App, null)
 			)
 		)
 	}
