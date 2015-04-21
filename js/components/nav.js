@@ -1,4 +1,6 @@
 var CLogic = require('../chartlogic.js');
+var ChartStore = require('../store/chartstore.js');
+
 
 var Nav = React.createClass({
 	displayName: 'Nav',
@@ -17,7 +19,7 @@ var Nav = React.createClass({
 				this.props.scroll(-1);
 				break;
 			case 'Add':
-				this.props.add()
+				ChartStore.add()
 				break;
 			case 'Sub':
 				this.props.sub()
