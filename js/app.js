@@ -23,7 +23,8 @@ var App = React.createClass({
 	_onChange: function() {
 		this.setState({
 			_charts: ChartStore.getAll(),
-			next: CurrentStore.getNext()
+			next: CurrentStore.getNext(),
+			current: CurrentStore.getCurrent()
 		});
 	},
 	// sub: function(){

@@ -1,7 +1,7 @@
 var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/dispatcher');
-
+var ChartStore = require('./chartstore.js');
 
 var _current = {
 	next: 6,
@@ -21,17 +21,28 @@ var CurrentStore = assign({}, EventEmitter.prototype, {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
 	setCurrent: function(i){
-		return _current.current = i;
+		_current.current = i;
+		this.emitChange();
 	},
 	setNext: function(){
-		console.log(_current)
-		return _current.next += 1;
+		_current.next += 1;
+		this.emitChange();
 	},
 	getCurrent: function(){
-		return _current.current
+		_current.current;
+		this.emitChange();
 	},
 	getNext: function(){
-		return _current.next
+		_current.next;
+		this.emitChange();
+	},
+	scroll: function(x){
+		var current = _current.current;
+		var charts = ChartStore.getAll();
+		var idx = charts.indexOf(current);
+		var newCurrent = charts[ (idx + x + charts.length) % charts.length ];
+		_current.current = newCurrent;
+		this.emitChange()
 	}
 })
 
