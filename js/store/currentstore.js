@@ -41,8 +41,9 @@ var CurrentStore = assign({}, EventEmitter.prototype, {
 		var charts = ChartStore.getAll();
 		var idx = charts.indexOf(current);
 		var newCurrent = charts[ (idx + x + charts.length) % charts.length ];
+		document.getElementById('mount'+current).className = 'chart';
+		document.getElementById('mount'+newCurrent).className = 'chart current';
 		_current.current = newCurrent;
-		console.log(_current)
 		this.emitChange();
 	}
 })

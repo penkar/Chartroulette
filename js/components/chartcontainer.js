@@ -7,7 +7,8 @@ var ChartContainer = React.createClass({
 	getInitialState:function(){
 		return ({
 			next: CurrentStore.getNext(),
-			charts: []
+			charts: [],
+			current: CurrentStore.getCurrent()
 		});
 	},
 	createSingle: function(i){
@@ -17,6 +18,18 @@ var ChartContainer = React.createClass({
 		};
 		return React.createElement(Chart, {class: current, id: i, key:i}); //Method will create a single chart each go around. This way it can be called on the initial render and each time new props are received.
 	},
+
+	componentDidMount: function() {
+		CurrentStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount: function() {
+		CurrentStore.removeChangeListener(this._onChange);
+	},
+	_onChange: function() {
+		this.setState({current: CurrentStore.getCurrent()});
+	},
+
+
 	componentWillMount: function(){
 		var array = []; //The first go around this will run and create a new chart from 0 up to recent. 
 		var next = this.props.next
