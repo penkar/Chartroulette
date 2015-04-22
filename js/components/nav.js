@@ -16,7 +16,7 @@ var Nav = React.createClass({
 	onClick: function(event){
 		switch(event.target.value){
 			case 'Prev':
-				this.props.scroll(-1);
+				CurrentStore.scroll(-1);
 				break;
 			case 'Add':
 				ChartStore.add();
@@ -27,7 +27,7 @@ var Nav = React.createClass({
 				ChartStore.sub(id)
 				break;
 			case 'Next':
-				this.props.scroll(1);
+				CurrentStore.scroll(1);
 				break;
 			case 'Add Data':
 				var id = document.getElementsByClassName('current')[0].id;

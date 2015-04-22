@@ -28,14 +28,7 @@
 		return series
 	}
 
-	// Scroll Function is necessary on the global scope for the charts to function properly.
-	var scrollFunc = function(current){
-		document.getElementsByClassName('current')[0].className = "chart"
-		document.getElementById('mount'+current).className = 'chart current'
-	}
-
 module.exports = {
 	createChart,
-	scrollFunc,
 	randomData
 }

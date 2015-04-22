@@ -27,43 +27,15 @@ var App = React.createClass({
 			current: CurrentStore.getCurrent()
 		});
 	},
-	// sub: function(){
-	// 	// Subtract chart will run the Highcharts destroy method on the current chart, scroll to the next chart, and remove the current chart from the _charts list which is used for scrolling between charts. 
+	// scroll: function(np){
+	// 	var _charts = this.state._charts;
 	// 	var current = this.state.current;
-	// 	var _charts = this.state._charts;
 	// 	var len = _charts.length;
-	// 	if(len === 1){
-	// 		return false
-	// 	};
 	// 	var idx = _charts.indexOf(current);
-	// 	document['mount'+current].destroy(); //React JS will not rerender the Highcharts correctly. Since you have to create the highchart after its container has been rendered, when the charts rerender they do properly read the highchart. In order to get around this you have to attach the chart globally and delete it through the global scope. 
-	// 	current = _charts[(idx + 1)%len];
-	// 	_charts.splice(idx,1); // Method will remove current view from available views. 
-	// 	this.setState({
-	// 		current: current,
-	// 		_charts: _charts
-	// 	});
-	// 	this.scroll(1);
+	// 	var current = ((idx + np)+len) % len; // Logic that determines what the current view is in the _charts array and finds the next one.
+	// 	this.setState({current: _charts[current]});  // Sets theh current to the new current.
+	// 	CLogic.scrollFunc(_charts[current]); // Global function that will select the current view, remove the current class, and add the current class to the new current view. 
 	// },
-	// add: function(){// This method does 3 things: 
-	// 	var _charts = this.state._charts;
-	// 	var next = this.state.next;
-	// 	_charts.push(next);
-	// 	this.setState({
-	// 		_charts: _charts, //Adds the new index to the list of available charts. 
-	// 		next: (next+1), //  Sends the recent state to the chart container which will in turn create a new chart.
-	// 		current: next //  Changes the current view to thew newly created chart. 
-	// 	});
-	// },
-	scroll: function(np){
-		var _charts = this.state._charts;
-		var current = this.state.current;
-		var len = _charts.length;
-		var idx = _charts.indexOf(current);
-		var current = ((idx + np)+len) % len; // Logic that determines what the current view is in the _charts array and finds the next one.
-		this.setState({current: _charts[current]});  // Sets theh current to the new current.
-		CLogic.scrollFunc(_charts[current]); // Global function that will select the current view, remove the current class, and add the current class to the new current view. 
-	},
 	render: function(){
 		var idx = this.state._charts.indexOf(this.state.current)
 		return React.createElement('div', {className: 'container'},
