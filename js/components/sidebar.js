@@ -3,9 +3,12 @@ var ChartStore = require('../store/chartstore.js');
 
 var Sidebar = React.createClass({
 	displayName:'Sidebar',
+	getInitialState: function(){
+		return({store: ChartStore.getAll()})
+	},
 	render: function(){
 		var arr = [];
-		var store = ChartStore.getAll();
+		var store = this.state.store
 		for(var i = 0, iLen = store.length; i < iLen; i++){
 			arr.push(
 				React.createElement('li', {className:'pure-menu-item'}, 
@@ -21,6 +24,15 @@ var Sidebar = React.createClass({
 				arr
 			)
 		)
+	},
+	componentDidMount: function() {
+		ChartStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount: function() {
+		ChartStore.removeChangeListener(this._onChange);
+	},
+	_onChange: function() {
+		this.setState({store: ChartStore.getAll()});
 	}
 })
 

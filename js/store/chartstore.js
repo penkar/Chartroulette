@@ -11,6 +11,15 @@ var CHANGE_EVENT = 'change';
 
 
 var ChartStore = assign({}, EventEmitter.prototype, {
+	emitChange: function(){
+		this.emit(CHANGE_EVENT);
+	},
+	addChangeListener: function(callback) {
+		this.on(CHANGE_EVENT, callback);
+	},
+	removeChangeListener: function(callback) {
+		this.removeListener(CHANGE_EVENT, callback);
+	},
 	getAll: function(){
 		return _charts.charts
 	},
@@ -20,12 +29,12 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 	add: function(){
 		_charts.charts.push(_charts.next);
 		_charts.next += 1;
-		console.log(_charts)
+		this.emitChange();
 	},
 	sub: function(id){
 		var idx = _charts.charts.indexOf(id);
 		_charts.charts.splice(idx,1);
-		console.log(_charts)
+		this.emitChange();
 	}
 })
 
