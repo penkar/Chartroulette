@@ -1,10 +1,12 @@
 var Chart = require('./chart.js');
+var ChartStore = require('../store/chartstore.js');
+var CurrentStore = require('../store/currentstore.js');
 
 var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState:function(){
 		return ({
-			next: this.props.next,
+			next: CurrentStore.getNext(),
 			charts: []
 		});
 	},

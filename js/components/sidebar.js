@@ -1,6 +1,5 @@
 var ChartStore = require('../store/chartstore.js');
 
-
 var Sidebar = React.createClass({
 	displayName:'Sidebar',
 	getInitialState: function(){

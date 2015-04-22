@@ -20,14 +20,17 @@ var CurrentStore = assign({}, EventEmitter.prototype, {
 	removeChangeListener: function(callback) {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
-	getCurrent: function(i){
+	setCurrent: function(i){
 		return _current.current = i;
 	},
-	getNext: function(i){
+	setNext: function(i){
 		return _current.next = i;
 	},
-	setCurrent: function(){
-		return _current
+	getCurrent: function(){
+		return _current.current
+	},
+	getNext: function(){
+		return _current.next
 	}
 })
 

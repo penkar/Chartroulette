@@ -3,6 +3,7 @@ var Header = require('./components/header.js');
 var Nav = require('./components/nav.js');
 var ChartStore = require('./store/chartstore.js');
 var ChartContainer = require('./components/chartcontainer.js');
+var CurrentStore = require('./store/currentstore.js');
 
 var App = React.createClass({
 	displayName: "App",
