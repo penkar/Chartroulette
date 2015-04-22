@@ -1,6 +1,7 @@
 var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/dispatcher');
+var CurrentStore = require('./currentstore.js');
 
 
 var _charts = {
@@ -29,11 +30,13 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 	add: function(){
 		_charts.charts.push(_charts.next);
 		_charts.next += 1;
+		CurrentStore._onChange();
 		this.emitChange();
 	},
 	sub: function(id){
 		var idx = _charts.charts.indexOf(id);
 		_charts.charts.splice(idx,1);
+		CurrentStore._onChange();
 		this.emitChange();
 	}
 })

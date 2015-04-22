@@ -49,6 +49,16 @@ var CurrentStore = assign({}, EventEmitter.prototype, {
 		document.getElementById('mount'+newCurrent).className = 'chart current';
 		_current.current = newCurrent;
 		this.emitChange();
+	},
+	_onChange: function() {
+		var all = ChartStore.getAll();
+		if(all.indexOf(_current.current) === -1){
+			console.log('scroll')
+			this.scroll(-1);
+		} else {
+			console.log('setcurrent')
+			this.setCurrent(all[all.length-1])
+		}
 	}
 })
 

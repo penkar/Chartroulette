@@ -14,7 +14,7 @@ var Sidebar = React.createClass({
 		var store = this.state.store
 		for(var i = 0, iLen = store.length; i < iLen; i++){
 			var sel = ''
-			if(i === this.state.current){
+			if(store[i] === this.state.current){
 				sel = ' pure-menu-selected'
 			}
 			arr.push(
