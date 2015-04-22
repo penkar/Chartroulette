@@ -29,7 +29,6 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 	add: function(){
 		_charts.charts.push(_charts.next);
 		_charts.next += 1;
-		console.log(_charts)
 		this.emitChange();
 	},
 	sub: function(id){
