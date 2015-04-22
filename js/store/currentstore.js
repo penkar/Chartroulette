@@ -23,8 +23,9 @@ var CurrentStore = assign({}, EventEmitter.prototype, {
 	setCurrent: function(i){
 		return _current.current = i;
 	},
-	setNext: function(i){
-		return _current.next = i;
+	setNext: function(){
+		console.log(_current)
+		return _current.next += 1;
 	},
 	getCurrent: function(){
 		return _current.current
