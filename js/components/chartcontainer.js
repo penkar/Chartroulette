@@ -6,8 +6,8 @@ var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState:function(){
 		return ({
-			next: CurrentStore.getNext(),
 			charts: [],
+			next: CurrentStore.getNext(),
 			current: CurrentStore.getCurrent()
 		});
 	},
@@ -26,20 +26,26 @@ var ChartContainer = React.createClass({
 		}
 		this.setState({charts: array})
 	},
-	componentWillReceiveProps: function(){ // ALl further updates will run through this functionality which will create new charts from the current recent up to the new recent.
-		var next = this.state.next;
-		var nr = this.props.next+1;
-		var array = this.state.charts;
-		for(var i = next ; i < nr; i++){
-			console.log(i, nr);
-			array.push( this.createSingle(i) )
-		} // Please note, no view are ever destroyed, new ones are just created. The contents will be destroyed through the Highcharts destroy method. However since React and HighCharts don't mesh well it is necessar to keep a div for each previous highchart.
-		this.setState({charts: array, next: nr})
-	},
 	render: function(){
+		var arr = [];
+		for(var i = 0; i < this.state.next; i++){
+			arr.push( this.createSingle(i));
+		}
 		return React.createElement('div', {className:'chart-container'}, 
-			this.state.charts
+			arr
 		)
+	},
+	componentDidMount: function() {
+		CurrentStore.addChangeListener(this._onChange);
+	},
+	componentWillUnmount: function() {
+		CurrentStore.removeChangeListener(this._onChange);
+	},
+	_onChange: function() {
+		console.log('_onChange')
+		this.setState({
+			next: CurrentStore.getNext(),
+		});
 	}
 });
 

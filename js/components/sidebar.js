@@ -25,7 +25,6 @@ var Sidebar = React.createClass({
 				)
 			)
 		}
-		console.log(arr,store)
 		return React.createElement('div', {style:{float:'left'}, className: 'pure-menu custom-restricted-width'},
 			React.createElement('ul', {className: 'pure-menu-list'},
 				React.createElement('li', {className:"pure-menu-heading"}, 'Available Charts'),
