@@ -8,7 +8,6 @@ var Chart = React.createClass({
 		return React.createElement('div', { id: mount, className: 'chart '+this.props.class } );
 	},
 	componentDidMount: function() {
-		// CurrentStore.addChangeListener(this._onChange);
 		CLogic.createChart(this.props.id);
 	}
 });
