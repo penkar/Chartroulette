@@ -41,7 +41,6 @@ var ChartContainer = React.createClass({
 		CurrentStore.removeChangeListener(this._onChange);
 	},
 	_onChange: function() {
-		console.log('_onChange')
 		this.setState({
 			next: CurrentStore.getNext(),
 		});

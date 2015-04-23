@@ -38,8 +38,6 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 		var id = parseInt(docid.replace('mount',''));
 		var idx = _charts.charts.indexOf(id);
 		_charts.charts.splice(idx,1);
-		console.log(CurrentStore)
-		// console.log(_charts, id, idx);
 		this.emitChange();
 	}
 })
