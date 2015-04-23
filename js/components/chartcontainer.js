@@ -31,6 +31,7 @@ var ChartContainer = React.createClass({
 		var nr = this.props.next+1;
 		var array = this.state.charts;
 		for(var i = next ; i < nr; i++){
+			console.log(i, nr);
 			array.push( this.createSingle(i) )
 		} // Please note, no view are ever destroyed, new ones are just created. The contents will be destroyed through the Highcharts destroy method. However since React and HighCharts don't mesh well it is necessar to keep a div for each previous highchart.
 		this.setState({charts: array, next: nr})

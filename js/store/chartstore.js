@@ -30,13 +30,14 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 	add: function(){
 		_charts.charts.push(_charts.next);
 		_charts.next += 1;
-		CurrentStore._onChange();
+		// CurrentStore._onChange();
 		this.emitChange();
 	},
 	sub: function(id){
 		var idx = _charts.charts.indexOf(id);
 		_charts.charts.splice(idx,1);
-		CurrentStore._onChange();
+		console.log(_charts)
+		// CurrentStore._onChange();
 		this.emitChange();
 	}
 })
