@@ -13,3 +13,5 @@ Flux dispatchers also utilized in event dispatching.
 #Further: 
 You should be able to add new charts, subtract existing charts, and add data to current charts. Further functionality is available by accessing the charts through the console: document[ 'mount' + chart-number ] 
 The Highcharts API is available here: http://api.highcharts.com/highcharts. Using the methods there in you should be able to manipulate the charts as normal. An example of how you might do this is used in the 'Add Data' button. Further details can be found in the chartroulette/js/components/nav.js file, line 34, 35.
+
+Working example can be found here: http://jspenkar.com/Chartroulette/
