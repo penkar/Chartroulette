@@ -19,7 +19,7 @@ var Sidebar = React.createClass({
 			}
 			arr.push(
 				React.createElement('li', {className:'pure-menu-item'+sel}, 
-					React.createElement('a', {className:'pure-menu-link'},
+					React.createElement('a', {className:'pure-menu-link', onClick:this._click, value: store[i]},
 						store[i]
 					)
 				)
@@ -31,6 +31,9 @@ var Sidebar = React.createClass({
 				arr
 			)
 		)
+	},
+	_click: function(){
+		CurrentStore.setCurrent(parseInt(event.target.getAttribute('value')));
 	},
 	componentDidMount: function() {
 		ChartStore.addChangeListener(this._onChange);
