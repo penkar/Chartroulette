@@ -19,8 +19,8 @@ var Sidebar = React.createClass({
 			}
 			arr.push(
 				React.createElement('li', {className:'pure-menu-item'+sel}, 
-					React.createElement('a', {className:'pure-menu-link', onClick:this._click, value: store[i]},
-						store[i]
+					React.createElement('a', {key: store[i], className:'pure-menu-link', onClick:this._click, value: store[i]},
+						'Chart '+ store[i]
 					)
 				)
 			)

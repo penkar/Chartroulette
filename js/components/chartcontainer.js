@@ -42,7 +42,7 @@ var ChartContainer = React.createClass({
 	},
 	_onChange: function() {
 		this.setState({
-			next: CurrentStore.getNext(),
+			next: CurrentStore.getNext()
 		});
 	}
 });
