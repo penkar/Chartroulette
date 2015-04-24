@@ -34,7 +34,7 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 		this.emitChange();
 	},
 	sub: function(docid){
-		document[docid].destroy;
+		document[docid].destroy();
 		var id = parseInt(docid.replace('mount',''));
 		var idx = _charts.charts.indexOf(id);
 		_charts.charts.splice(idx,1);
