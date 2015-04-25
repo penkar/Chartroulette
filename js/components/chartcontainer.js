@@ -6,16 +6,16 @@ var ChartContainer = React.createClass({
 	displayName: 'ChartContainer',
 	getInitialState:function(){
 		return ({
-			charts: [],
-			next: CurrentStore.getNext(),
-			current: CurrentStore.getCurrent()
+			charts: ChartStore.getAll(),
+			next: CurrentStore.getNext()
 		});
 	},
 	render: function(){
-		var arr = [], charts = this.state.charts;
+		var arr = [];
+		var charts = this.state.charts;
 		for(var i = 0; i < charts.length; i++){
 			var id = charts[i];
-			arr.push( React.createElement(Chart, {class: current, id: id, key:id}));
+			arr.push( React.createElement(Chart, {id: id, key:id}));
 		}
 		return React.createElement('div', {className:'chart-container'}, 
 			arr

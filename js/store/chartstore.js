@@ -30,7 +30,6 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 	add: function(){
 		_charts.charts.push(_charts.next);
 		_charts.next += 1;
-		// CurrentStore._onChange();
 		this.emitChange();
 	},
 	sub: function(docid){
