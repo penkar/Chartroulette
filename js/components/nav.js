@@ -14,6 +14,7 @@ var Nav = React.createClass({
 		);
 	},
 	onClick: function(event){
+		var id = document.getElementsByClassName('current')[0].id
 		switch(event.target.value){
 			case 'Prev':
 				CurrentStore.scroll(-1);
@@ -23,7 +24,6 @@ var Nav = React.createClass({
 				CurrentStore.setNext();
 				break;
 			case 'Sub':
-				var id = document.getElementsByClassName('current')[0].id
 				CurrentStore.scroll(-1);
 				ChartStore.sub(id)
 				break;
@@ -31,7 +31,6 @@ var Nav = React.createClass({
 				CurrentStore.scroll(1);
 				break;
 			case 'Add Data':
-				var id = document.getElementsByClassName('current')[0].id;
 				document[id].addSeries(CLogic.randomData());
 				break;
 			default:
