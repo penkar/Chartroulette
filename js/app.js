@@ -1,4 +1,3 @@
-var CLogic = require('./chartlogic.js');
 var Header = require('./components/header.js');
 var Nav = require('./components/nav.js');
 var ChartContainer = require('./components/chartcontainer.js');
@@ -8,10 +7,9 @@ var CurrentStore = require('./store/currentstore.js');
 var App = React.createClass({
 	displayName: "App",
 	getInitialState: function(){
-		return({	// Get initial state will start the current view at 0, set the recent and get the charts array into state.
-			current: 0,
+		return({
 			next: ChartStore.getLength(),
-			_charts: ChartStore.getAll()
+			len: ChartStore.getLength()
 		});
 	},
 	componentDidMount: function() {
@@ -22,15 +20,13 @@ var App = React.createClass({
 	},
 	_onChange: function() {
 		this.setState({
-			_charts: ChartStore.getAll(),
-			next: CurrentStore.getNext(),
-			current: CurrentStore.getCurrent()
+			len: ChartStore.getLength(),
+			next: CurrentStore.getNext()
 		});
 	},
 	render: function(){
-		var idx = this.state._charts.indexOf(this.state.current)
 		return React.createElement('div', {className: 'container'},
-			React.createElement(Header, {cur: idx, len: this.state._charts.length}),
+			React.createElement(Header, {len: this.state.len}),
 			React.createElement(ChartContainer, {
 				next: this.state.next
 			}),

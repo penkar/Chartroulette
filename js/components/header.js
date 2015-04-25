@@ -1,6 +1,5 @@
 var CurrentStore = require('../store/currentstore.js');
 
-
 var Header = React.createClass({
 	displayName: 'Header',
 	getInitialState: function(){

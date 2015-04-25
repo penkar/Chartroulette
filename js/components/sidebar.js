@@ -11,11 +11,11 @@ var Sidebar = React.createClass({
 	},
 	render: function(){
 		var arr = [];
-		var store = this.state.store
+		var store = this.state.store;
 		for(var i = 0, iLen = store.length; i < iLen; i++){
-			var sel = ''
+			var sel = '';
 			if(store[i] === this.state.current){
-				sel = ' pure-menu-selected'
+				sel = ' pure-menu-selected';
 			}
 			arr.push(
 				React.createElement('li', {className:'pure-menu-item'+sel}, 
@@ -23,14 +23,14 @@ var Sidebar = React.createClass({
 						'Chart '+ store[i]
 					)
 				)
-			)
+			);
 		}
 		return React.createElement('div', {style:{float:'left'}, className: 'pure-menu custom-restricted-width'},
 			React.createElement('ul', {className: 'pure-menu-list'},
 				React.createElement('li', {className:"pure-menu-heading"}, 'Available Charts'),
 				arr
 			)
-		)
+		);
 	},
 	_click: function(){
 		CurrentStore.setCurrent(parseInt(event.target.getAttribute('value')));

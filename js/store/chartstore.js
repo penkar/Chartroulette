@@ -3,13 +3,11 @@ var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/dispatcher');
 var CurrentStore = require('./currentstore.js');
 
-
 var _charts = {
 	next: 6,
 	charts: [0,1,2,3,4,5]
 };
 var CHANGE_EVENT = 'change';
-
 
 var ChartStore = assign({}, EventEmitter.prototype, {
 	emitChange: function(){
@@ -40,6 +38,5 @@ var ChartStore = assign({}, EventEmitter.prototype, {
 		this.emitChange();
 	}
 })
-
 
 module.exports = ChartStore;
