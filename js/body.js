@@ -1,19 +1,16 @@
-var App = require('./app.js');
-var Sidebar = require('./components/sidebar.js');
+import React from 'react'
+import App from './App.js'
+import {Sidebar} from './components'
+import {render} from 'react-dom'
 
-var Body = React.createClass({
-	displayName: 'Body',
-	render: function(){
-		return(
-			React.createElement('div', {className:'body'},
-				React.createElement(Sidebar, null),
-				React.createElement(App, null)
-			)
-		)
-	}
-})
+const Body = () => (
+	<div className='body'>
+		<Sidebar />
+		<App />
+	</div>
+)
 
-React.render(
-	React.createElement(Body, null),
+render(
+	Body(),
 	document.getElementById('mount')
 )

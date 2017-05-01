@@ -1,4 +1,3 @@
-var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/dispatcher');
 var CurrentStore = require('./currentstore.js');
@@ -9,7 +8,7 @@ var _charts = {
 };
 var CHANGE_EVENT = 'change';
 
-var ChartStore = assign({}, EventEmitter.prototype, {
+var ChartStore = Object.assign({}, EventEmitter.prototype, {
 	emitChange: function(){
 		this.emit(CHANGE_EVENT);
 	},

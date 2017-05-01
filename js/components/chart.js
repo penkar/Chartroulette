@@ -1,21 +1,24 @@
-var CLogic = require('../chartlogic.js');
+import React from 'react';
+import {createChart} from '../chartlogic.js';
 
-var Chart = React.createClass({
-	displayName: 'Chart',
-	getInitialState: function(){
-		return ({current: 0})
-	},
-	render: function(){
-		var id = this.props.id
-		var mount = 'mount'+id, _class = '';
-		if(this.props.current === id){
+class Chart extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {current: 0}
+	}
+
+	componentDidMount() {
+		createChart(this.props.id);
+	}
+
+	render() {
+		let {id, current} = this.props
+		let mount = 'mount'+id, _class = '';
+		if(current === id){
 			_class = ' current'
 		}
-		return React.createElement('div', { id: mount, className: 'chart ' + _class } );
-	},
-	componentDidMount: function() {
-		CLogic.createChart(this.props.id);
-	},
-});
+		return <div id={mount} className={'chart '+ _class} />
+	}
+}
 
-module.exports = Chart
+export default Chart;

@@ -1,40 +1,48 @@
-var Chart = require('./chart.js');
-var ChartStore = require('../store/chartstore.js');
-var CurrentStore = require('../store/currentstore.js');
+import React from 'react';
+import Chart from './Chart'
+import ChartStore from '../store/chartstore.js';
+import CurrentStore from '../store/currentstore.js';
 
-var ChartContainer = React.createClass({
-	displayName: 'ChartContainer',
-	getInitialState:function(){
-		return ({
+class ChartContainer extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state = {
 			charts: ChartStore.getAll(),
-			current: 0
-		});
-	},
-	render: function(){
-		var arr = [];
-		var charts = this.state.charts;
-		for(var i = 0; i < charts.length; i++){
-			var id = charts[i];
-			arr.push( React.createElement(Chart, {id: id, key:id, current: this.state.current}));
+			current: 0,
 		}
-		return React.createElement('div', {className:'chart-container'}, 
-			arr
-		)
-	},
-	componentDidMount: function() {
+		this._onChange = this._onChange.bind(this);
+		this._charts = this._charts.bind(this);
+	}
+
+	componentDidMount() {
 		ChartStore.addChangeListener(this._onChange);
 		CurrentStore.addChangeListener(this._onChange);
-	},
-	componentWillUnmount: function() {
+	}
+
+	componentWillUnmount() {
 		ChartStore.removeChangeListener(this._onChange);
 		CurrentStore.removeChangeListener(this._onChange);
-	},
-	_onChange: function() {
+	}
+
+	render() {
+		return (
+			<div className='chart-container'>
+				{ this._charts() }
+			</div>
+		)
+	}
+
+	_charts() {
+		let {charts, current} = this.state;
+		return charts.map((chart, i) => (<Chart id={chart} key={i} current={current}/>))
+	}
+
+	_onChange() {
 		this.setState({
 			charts: ChartStore.getAll(),
 			current: CurrentStore.getCurrent()
 		});
 	}
-});
+}
 
-module.exports = ChartContainer
+export default ChartContainer

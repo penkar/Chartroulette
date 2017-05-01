@@ -1,54 +1,63 @@
-var ChartStore = require('../store/chartstore.js');
-var CurrentStore = require('../store/currentstore.js');
+import React from 'react';
+import ChartStore from '../store/chartstore.js'
+import CurrentStore from '../store/currentstore.js'
 
-var Sidebar = React.createClass({
-	displayName:'Sidebar',
-	getInitialState: function(){
-		return({
+class Sidebar extends React.Component {
+	constructor(props) {
+		super(props)
+		this._click = this._click.bind(this);
+		this._onChange = this._onChange.bind(this);
+		this._menuItems = this._menuItems.bind(this);
+		this.state = {
 			store: ChartStore.getAll(),
-			current: CurrentStore.getCurrent()
-		})
-	},
-	render: function(){
-		var arr = [];
-		var store = this.state.store;
-		for(var i = 0, iLen = store.length; i < iLen; i++){
-			var sel = '';
-			if(store[i] === this.state.current){
-				sel = ' pure-menu-selected';
-			}
-			arr.push(
-				React.createElement('li', {className:'pure-menu-item'+sel}, 
-					React.createElement('a', {key: store[i], className:'pure-menu-link', onClick:this._click, value: store[i]},
-						'Chart '+ store[i]
-					)
-				)
-			);
+			current: CurrentStore.getCurrent(),
 		}
-		return React.createElement('div', {style:{float:'left'}, className: 'pure-menu custom-restricted-width'},
-			React.createElement('ul', {className: 'pure-menu-list'},
-				React.createElement('li', {className:"pure-menu-heading"}, 'Available Charts'),
-				arr
-			)
-		);
-	},
-	_click: function(){
-		CurrentStore.setCurrent(parseInt(event.target.getAttribute('value')));
-	},
-	componentDidMount: function() {
+	}
+
+	componentDidMount() {
 		ChartStore.addChangeListener(this._onChange);
 		CurrentStore.addChangeListener(this._onChange);
-	},
-	componentWillUnmount: function() {
+	}
+
+	componentWillUnmount() {
 		ChartStore.removeChangeListener(this._onChange);
 		CurrentStore.addChangeListener(this._onChange);
-	},
-	_onChange: function() {
+	}
+
+	render() {
+		return (
+			<div style={{float:'left'}} className='pure-menu custom-restricted-width'>
+				<ul className='pure-menu-list'>
+					<li key='null' className='pure-menu-heading'>Available Charts</li>
+					{this._menuItems()}
+				</ul>
+			</div>
+		);
+	}
+
+	_menuItems() {
+		let arr = [];
+		let {store, current} = this.state;
+		return store.map((val, i)=> (
+				<li key={i} className={`pure-menu-item${store[i] === current ? ' pure-menu-selected' : '' }`}>
+					<a key={i} className='pure-menu-link' onClick={this._click} value={store[i]}>
+						{`Chart ${store[i]}`}
+					</a>
+				</li>
+			)
+		)
+	}
+
+	_click(event) {
+		CurrentStore.setCurrent(parseInt(event.target.getAttribute('value')));
+	}
+
+	_onChange() {
 		this.setState({
 			store: ChartStore.getAll(),
 			current: CurrentStore.getCurrent()
 		});
 	}
-})
+}
 
-module.exports = Sidebar;
+export default Sidebar

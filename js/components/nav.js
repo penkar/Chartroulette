@@ -1,41 +1,44 @@
-var CLogic = require('../chartlogic.js');
-var ChartStore = require('../store/chartstore.js');
-var CurrentStore = require('../store/currentstore.js');
+import React from 'react';
+import {randomData} from '../chartlogic.js'
+import ChartStore from '../store/chartstore.js'
+import CurrentStore from '../store/currentstore.js'
 
-var Nav = React.createClass({
-	displayName: 'Nav',
-	render: function(){
-		return React.createElement('div', null,
-			React.createElement('button', {onClick:this.onClick, value: 'Prev', className:"pure-button pure-button-primary"}, 'Prev'),
-			React.createElement('button', {onClick:this.onClick, value: 'Add', className:"pure-button button-success"}, 'Add'),
-			React.createElement('button', {onClick:this.onClick, value: 'Sub', className:"pure-button button-error"}, 'Sub'),
-			React.createElement('button', {onClick:this.onClick, value: 'Add Data', className:"pure-button button-success"}, 'Add Data'),
-			React.createElement('button', {onClick:this.onClick, value: 'Next', className:"pure-button pure-button-primary"}, 'Next')
+class Nav extends React.Component {
+	constructor(props) {
+		super(props);
+		this._onClick = this._onClick.bind(this);
+	}
+
+	render() {
+		return (
+			<div>
+				<button onClick={this._onClick} value='Prev' className='pure-button pure-button-primary'>Prev</button>
+				<button onClick={this._onClick} value='Add' className='pure-button button-success'>Add</button>
+				<button onClick={this._onClick} value='Sub' className='pure-button button-error'>Sub</button>
+				<button onClick={this._onClick} value='Add Data' className='pure-button button-success'>Add Data</button>
+				<button onClick={this._onClick} value='Next' className='pure-button pure-button-primary'>Next</button>
+			</div>
 		);
-	},
-	onClick: function(event){
+	}
+
+	_onClick(event) {
 		var id = document.getElementsByClassName('current')[0].id
 		switch(event.target.value){
 			case 'Prev':
-				CurrentStore.scroll(-1);
-				break;
+				return CurrentStore.scroll(-1);
 			case 'Add':
 				ChartStore.add();
-				CurrentStore.setNext();
-				break;
+				return CurrentStore.setNext();
 			case 'Sub':
 				CurrentStore.scroll(-1);
-				ChartStore.sub(id)
-				break;
+				return ChartStore.sub(id)
 			case 'Next':
-				CurrentStore.scroll(1);
-				break;
+				return CurrentStore.scroll(1);
 			case 'Add Data':
-				document[id].addSeries(CLogic.randomData());
-				break;
+				return document[id].addSeries(randomData());
 			default:
+				return null;
 		}
 	}
-});
-
-module.exports = Nav
+}
+export default Nav

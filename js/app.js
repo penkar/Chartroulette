@@ -1,38 +1,42 @@
-var Header = require('./components/header.js');
-var Nav = require('./components/nav.js');
-var ChartContainer = require('./components/chartcontainer.js');
-var ChartStore = require('./store/chartstore.js');
-var CurrentStore = require('./store/currentstore.js');
+import React from 'react'
+import {Header, Nav, Chartcontainer,} from './components'
+import ChartStore from './store/chartstore.js'
+import CurrentStore from './store/currentstore.js'
 
-var App = React.createClass({
-	displayName: "App",
-	getInitialState: function(){
-		return({
+class App extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {
 			next: ChartStore.getLength(),
 			len: ChartStore.getLength()
-		});
-	},
-	componentDidMount: function() {
+		}
+		this._onChange = this._onChange.bind(this);
+	}
+
+	componentDidMount(){
 		ChartStore.addChangeListener(this._onChange);
-	},
-	componentWillUnmount: function() {
+	}
+
+	componentWillUnmount(){
 		ChartStore.removeChangeListener(this._onChange);
-	},
-	_onChange: function() {
+	}
+
+	render(){
+		return (
+			<div className='container'>
+				<Header len={this.state.len} />
+				<Chartcontainer next={this.state.next} />
+				<Nav />
+			</div>
+		)
+	}
+
+	_onChange(){
 		this.setState({
 			len: ChartStore.getLength(),
 			next: CurrentStore.getNext()
 		});
-	},
-	render: function(){
-		return React.createElement('div', {className: 'container'},
-			React.createElement(Header, {len: this.state.len}),
-			React.createElement(ChartContainer, {
-				next: this.state.next
-			}),
-			React.createElement(Nav, null)
-		);
 	}
-});
+}
 
-module.exports = App;
+export default App
