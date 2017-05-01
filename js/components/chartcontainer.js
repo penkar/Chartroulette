@@ -33,8 +33,11 @@ class ChartContainer extends React.Component{
 	}
 
 	_charts() {
-		let {charts, current} = this.state;
-		return charts.map((chart, i) => (<Chart id={chart} key={i} current={current}/>))
+		let {charts, current} = this.state, arr = [], {next} = this.props;
+		for(var i = 0; i < next + 1; i++) {
+			arr.push(<Chart id={i} key={i} current={current}/>)
+		}
+		return arr;
 	}
 
 	_onChange() {

@@ -6,7 +6,7 @@ var _charts = {
 	next: 6,
 	charts: [0,1,2,3,4,5]
 };
-var CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'change';
 
 var ChartStore = Object.assign({}, EventEmitter.prototype, {
 	emitChange: function(){
