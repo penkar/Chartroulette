@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from './Chart'
+import Chart from './chart'
 import ChartStore from '../store/chartstore.js';
 import CurrentStore from '../store/currentstore.js';
 

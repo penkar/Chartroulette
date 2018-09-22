@@ -1,5 +1,5 @@
 import React from 'react'
-import App from './App.js'
+import App from './app.js'
 import {Sidebar} from './components'
 import {render} from 'react-dom'
 

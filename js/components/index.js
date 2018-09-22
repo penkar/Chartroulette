@@ -1,7 +1,7 @@
-import Header from './Header'
-import Nav from './Nav'
-import Sidebar from './Sidebar'
-import Chartcontainer from './Chartcontainer'
-import Chart from './Chart'
+import Header from './header'
+import Nav from './nav'
+import Sidebar from './sidebar'
+import Chartcontainer from './chartcontainer'
+import Chart from './chart'
 
 export {Header, Nav, Sidebar, Chartcontainer, Chart}
